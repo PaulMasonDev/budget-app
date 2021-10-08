@@ -1,13 +1,15 @@
 import {
+  Button,
   Grid,
   makeStyles,
   Table,
+  TableBody,
   TableCell,
   TableHead,
   TableRow,
   Typography,
 } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import { LineItem } from "./LineItem";
 
 const useStyles = makeStyles({
@@ -22,9 +24,12 @@ const tableArr = [
   { title: "BUDGETED", value: 0 },
 ];
 
-export const CategoryCard = () => {
-  const classes = useStyles();
+const infoArr = [{ name: "", spent: 0, budgeted: 0 }];
 
+export const CategoryCard = () => {
+  const [info, setInfo] = useState(infoArr);
+  const classes = useStyles();
+  const handleAdd = () => {};
   return (
     <Grid className={classes.card} item xl={4} lg={4} md={4} sm={4} xs={12}>
       <Typography variant="h2">Category</Typography>
@@ -36,14 +41,19 @@ export const CategoryCard = () => {
             })}
           </TableRow>
         </TableHead>
-        <TableHead>
+        <TableBody>
           <TableRow>
-            {tableArr?.map((item) => {
-              return <LineItem value={item.value} />;
+            {info?.map((item) => {
+              return <LineItem item={item} />;
             })}
           </TableRow>
-        </TableHead>
+        </TableBody>
       </Table>
+      <Grid item>
+        <Button onClick={handleAdd} variant="contained" color="primary">
+          ADD ITEM
+        </Button>
+      </Grid>
     </Grid>
   );
 };
