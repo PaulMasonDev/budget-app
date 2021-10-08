@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 import React, { useState } from "react";
 import { LineItem } from "./LineItem";
+import { LineItemBox } from "./LineItemBox";
 
 const useStyles = makeStyles({
   card: {
@@ -24,10 +25,14 @@ const tableArr = [
   { title: "BUDGETED", value: 0 },
 ];
 
-const infoArr = [{ name: "", spent: 0, budgeted: 0 }];
+//PUT INTO API CALL LATER
+const lineItems = [
+  { id: 1, name: "", spent: 0, budgeted: 0 },
+  { id: 2, name: "", spent: 0, budgeted: 0 },
+];
 
 export const CategoryCard = () => {
-  const [info, setInfo] = useState(infoArr);
+  //const [info, setInfo] = useState(infoArr);
   const classes = useStyles();
   const handleAdd = () => {};
   return (
@@ -42,11 +47,7 @@ export const CategoryCard = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          <TableRow>
-            {info?.map((item) => {
-              return <LineItem item={item} />;
-            })}
-          </TableRow>
+          <LineItemBox lineItems={lineItems}></LineItemBox>
         </TableBody>
       </Table>
       <Grid item>
